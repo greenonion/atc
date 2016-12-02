@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
+    puts current_user.email if user_signed_in?
   end
 
   def show
