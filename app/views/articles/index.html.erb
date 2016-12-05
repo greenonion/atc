@@ -1,24 +1,29 @@
 <% provide(:title, 'Home') %>
 
-<div class="center jumbotron">
-  <h1>Athens Tech City</h1>
-</div>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-  </tr>
-
-  <% @articles.each do |article|  %>
+<table class="itemlist" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
+  <% @articles.each_with_index do |article, index|  %>
+    <tr class="athing">
+      <td align="right" valign="top" class="title">
+        <span class="rank"><%= index + 1 %>.</span>
+      </td>
+      <td valign="top" class="votelinks">
+        <center>
+          <!-- TODO: Create an onclick event here -->
+          <span class="glyphicon glyphicon-chevron-up" title="upvote"></span>
+        </center>
+      </td>
+      <td class="title"><%= link_to article.title, article %></td>
+    </tr>
     <tr>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', article_path(article),
-          method: :delete,
-          data: { confirm: 'Are you sure?' } %></td>
+      <td colspan="2"></td>
+      <!-- <td><%= article.text %></td> -->
+      <td class="subtext">
+        <span class="score">100 points</span>
+        by greenonion
+        <span class="age">2 hours ago</span>
+        |
+        112 Comments
+      </td>
     </tr>
   <% end %>
 </table>
