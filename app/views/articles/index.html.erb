@@ -19,7 +19,7 @@
       <!-- <td><%= article.text %></td> -->
       <td class="subtext">
         <span class="score">100 points</span>
-        by greenonion
+        by <%= link_to article.user.username, article.user %>
         <span class="age">2 hours ago</span>
         |
         112 Comments

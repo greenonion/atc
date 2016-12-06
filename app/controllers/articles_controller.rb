@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+
   def index
     @articles = Article.all
-    puts current_user.email if user_signed_in?
   end
 
   def show
@@ -17,7 +18,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(article_params.merge(user: current_user))
 
     if @article.save
       redirect_to @article
