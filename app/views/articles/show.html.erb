@@ -1,13 +1,48 @@
 <% provide(:title, @article.title) %>
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+<table border="0" >
+  <tbody>
+    <tr class="athing">
+      <td align="right" valign="top" class="title">
+        <span class="rank"></span>
+      </td>
+      <td valign="top" class="votelinks">
+        <center>
+          <!-- TODO: Create an onclick event here -->
+          <span class="glyphicon glyphicon-chevron-up" title="upvote"></span>
+        </center>
+      </td>
+      <td class="title">
+        <% if @article.url.blank? %>
+          <%= link_to @article.title, @article %>
+        <% else %>
+          <%= link_to @article.title, @article.url %>
+          (<%= URI(@article.url).host.sub(/^www\./, '') %>)
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <!-- <td><%= @article.text %></td> -->
+      <td class="subtext">
+        <span class="score">100 points</span>
+        by <%= link_to @article.user.username, @article.user %>
+        <span class="age">
+          <%= link_to time_ago_in_words(@article.created_at) + " ago", @article %>
+        </span>
+        |
+        <%= link_to '112 Comments', @article %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<% if @article.text.present? %>
+  <p>
+    <strong>Text:</strong>
+    <%= @article.text %>
+  </p>
+<% end %>
 
 <h2>Comments:</h2>
 <%= render @article.comments %>
